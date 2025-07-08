@@ -6,11 +6,15 @@
   </head>
   <body>
     <div class="main">
-      <div>
-        <button>Clock in</button>
+      <div class="main__timer">
+        <div class="timer__container">
+          <button class="timer__button ts-clockin">Clock in</button>
+          <span class="timer__counter ts-elapsedtime"></span>
+        </div>
+        <button class="timer__button ts-clockout">Clock out</button>
       </div>
-      <div>
-        <table>
+      <div class="main__history">
+        <table class="history__table">
           <thead>
             <tr>
               <th>Time in</th>
@@ -19,8 +23,8 @@
           </thead>
           <tbody>
             <tr>
-              <td>01:00:00</td>
-              <td>00:00:10</td>
+              <td class="ts-timein">01:00:00</td>
+              <td class="ts-timeout">00:00:10</td>
             </tr>
           </tbody>
         </table>
@@ -29,9 +33,9 @@
 
     <div class="navbar">
       <ul>
-        <li>Stats</li>
-        <li>Add</li>
-        <li>Settings</li>
+        <li class="ts-navstats">Stats</li>
+        <li class="ts-navadd">Add</li>
+        <li class="ts-navsettings">Settings</li>
       </ul>
     </div>
 
