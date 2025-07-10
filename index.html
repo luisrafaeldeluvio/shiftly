@@ -9,17 +9,17 @@
     <div class="main">
       <div class="main__timer">
         <div class="timer__container">
-          <button class="timer__button timer__clockin ts-clockin">
-            Clock in
-          </button>
+          <button class="button timer__clockin ts-clockin">CLOCK IN</button>
           <span class="timer__counter ts-elapsedtime"></span>
         </div>
         <div class="timer__controls">
-          <button class="timer__button--s timer__clockout ts-clockout">
+          <button class="button button--s timer__clockout ts-clockout">
+            CLOCK OUT
+          </button>
+          <button class="button button--s button--round timer__pause">O</button>
+          <button class="button button--s button--round timer__resume">
             O
           </button>
-          <button class="timer__button--s timer__pause">O</button>
-          <button class="timer__button--s timer__resume">O</button>
         </div>
       </div>
       <div class="main__history">
@@ -44,9 +44,15 @@
 
     <div class="nav">
       <ul>
-        <li class="ts-navstats">Stats</li>
-        <li class="ts-navadd">Add</li>
-        <li class="ts-navsettings">Settings</li>
+        <li class="ts-navstats">
+          <img src="src/assets/icons/bar_chart.svg" />
+        </li>
+        <li class="ts-navadd">
+          <img src="src/assets/icons/add_roundborder.svg" />
+        </li>
+        <li class="ts-navsettings">
+          <img src="src/assets/icons/settings.svg" />
+        </li>
       </ul>
     </div>
 

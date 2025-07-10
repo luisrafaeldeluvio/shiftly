@@ -1,3 +1,9 @@
 $primary-color: rgba(44, 111, 176, 1);
 $secondary-color: #f9f5ed;
 $tertiary-color: #fff9f2;
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

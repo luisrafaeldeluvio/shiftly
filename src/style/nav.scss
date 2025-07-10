@@ -1,13 +1,14 @@
-@import "utils";
+@use "utils";
 
 .nav {
-  background: $primary-color;
+  background: utils.$primary-color;
   border-radius: 2rem;
   bottom: 0.5rem;
   left: 50%;
   position: fixed;
   transform: translateX(-50%);
   width: 95%;
+  border: 1px solid black;
 
   ul {
     align-items: center;
@@ -15,5 +16,10 @@
     height: 5rem;
     justify-content: space-around;
     list-style-type: none;
+  }
+
+  li img {
+    height: 1.5rem;
+    width: 1.5rem;
   }
 }
