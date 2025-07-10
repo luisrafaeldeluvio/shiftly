@@ -1,0 +1,19 @@
+@import "utils";
+
+.nav {
+  background: $primary-color;
+  border-radius: 2rem;
+  bottom: 0.5rem;
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+  width: 95%;
+
+  ul {
+    align-items: center;
+    display: flex;
+    height: 5rem;
+    justify-content: space-around;
+    list-style-type: none;
+  }
+}
