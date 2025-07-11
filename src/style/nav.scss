@@ -1,25 +1,35 @@
 @use "utils";
 
 .nav {
-  background: utils.$primary-color;
-  border-radius: 2rem;
-  bottom: 0.5rem;
-  left: 50%;
+  background: utils.$secondary-color;
+
   position: fixed;
   transform: translateX(-50%);
+  left: 50%;
+
   width: 95%;
-  border: 1px solid black;
+  bottom: 1rem;
+
+  border: 2px solid black;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 0px 1px #000000;
 
   ul {
-    align-items: center;
     display: flex;
-    height: 5rem;
+    align-items: center;
     justify-content: space-around;
+
+    height: 3rem;
+
     list-style-type: none;
   }
 
-  li img {
-    height: 1.5rem;
-    width: 1.5rem;
+  &--active {
+    font-size: 1.25rem;
+    padding: 1.25rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    background: utils.$secondary-color;
+    box-shadow: 3px 3px 0px 1px #000000;
   }
 }
