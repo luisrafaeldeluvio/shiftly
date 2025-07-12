@@ -6,40 +6,40 @@
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
-    <div class="main">
-      <div class="main__timer">
-        <div class="timer__container">
-          <button class="button timer__clockin ts-clockin">CLOCK IN</button>
-          <span class="timer__counter ts-elapsedtime"></span>
-        </div>
-        <div class="timer__controls">
-          <button class="button button--s timer__clockout ts-clockout">
-            CLOCK OUT
-          </button>
-          <button class="button button--s button--round timer__pause">O</button>
-          <button class="button button--s button--round timer__resume">
-            O
-          </button>
-        </div>
+    <div class="timer">
+      <div class="timer__time">
+        <button class="button timer__clockin ts-clockin">CLOCK IN</button>
+        <span class="timer__counter ts-elapsedtime"></span>
       </div>
-      <div class="main__history">
-        <table class="history__table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time in</th>
-              <th>Time out</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>4/4/2020</td>
-              <td class="ts-timein">01:00:00</td>
-              <td class="ts-timeout">00:00:10</td>
-            </tr>
-          </tbody>
-        </table>
+
+      <div class="timer__controls">
+        <button class="button button--s timer__clockout ts-clockout">
+          CLOCK OUT
+        </button>
+        <button class="button button--s button--round timer__pause">O</button>
+        <button class="button button--s button--round timer__resume">O</button>
       </div>
+    </div>
+
+    <div class="panel history">
+      <table class="history__table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time in</th>
+            <th>Time out</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4/4/2020</td>
+            <td class="ts-timein">01:00:00</td>
+            <td class="ts-timeout">00:00:10</td>
+            <td>2:43:53</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="nav">
@@ -49,9 +49,5 @@
         <li class="ts-navsettings">Settings</li>
       </ul>
     </div>
-
-    <div class="panel"></div>
-    <div class="panel"></div>
-    <div class="panel"></div>
   </body>
 </html>

@@ -3,16 +3,10 @@
 .nav {
   background: utils.$secondary-color;
 
-  position: fixed;
-  transform: translateX(-50%);
-  left: 50%;
-
   width: 95%;
-  bottom: 1rem;
+  margin-bottom: 2rem;
 
-  border: 2px solid black;
-  border-radius: 1rem;
-  box-shadow: 3px 3px 0px 1px #000000;
+  @include utils.shadowed-border();
 
   ul {
     display: flex;
@@ -25,11 +19,9 @@
   }
 
   &--active {
+    background: utils.$secondary-color;
     font-size: 1.25rem;
     padding: 1.25rem;
-    border: 2px solid black;
-    border-radius: 0.5rem;
-    background: utils.$secondary-color;
-    box-shadow: 3px 3px 0px 1px #000000;
+    @include utils.shadowed-border($border-radius: 0.5rem);
   }
 }

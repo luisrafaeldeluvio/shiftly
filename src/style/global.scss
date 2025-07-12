@@ -1,3 +1,5 @@
+@use "utils";
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
@@ -10,6 +12,12 @@
 html,
 body {
   font-family: "Inter", sans-serif;
+  background: utils.$secondary-color;
+
   height: 100%;
   width: 100%;
+
+  @include utils.flex-center();
+  flex-direction: column;
+  gap: 2rem;
 }
