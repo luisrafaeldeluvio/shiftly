@@ -2,7 +2,6 @@
 
 .timer {
   flex-grow: 1;
-
   @include utils.flex-center();
   flex-direction: column;
 
@@ -13,8 +12,8 @@
   }
 
   &__clockin {
-    transition-property: width, height, border-radius;
     transition-duration: 0.25s;
+    transition-property: width, height, border-radius;
 
     // For when the button is clicked
     // &:hover {
@@ -43,25 +42,20 @@
 
 .panel {
   flex-grow: 2;
-
-  overflow-y: scroll;
-
-  scrollbar-width: none;
-  scroll-behavior: smooth;
-
   background: utils.$tertiary-color;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
   @include utils.shadowed-border();
-
   width: 95%;
   height: 10rem;
 }
 
 .history {
   &__table {
-    text-align: center;
     width: 100%;
-
     overflow-y: scroll;
+    text-align: center;
 
     th,
     td {
