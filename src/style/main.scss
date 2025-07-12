@@ -2,6 +2,7 @@
 
 .timer {
   flex-grow: 1;
+  width: 100%;
   @include utils.flex-center();
   flex-direction: column;
 
@@ -16,11 +17,11 @@
     transition-property: width, height, border-radius;
 
     // For when the button is clicked
-    // &:hover {
-    //   width: 20rem;
-    //   height: 20rem;
-    //   border-radius: 10rem;
-    // }
+    &:hover {
+      border-radius: 50%;
+      width: 10rem;
+      height: 10rem;
+    }
   }
 
   &__controls {
@@ -32,6 +33,7 @@
   &__clockout {
     flex-grow: 5;
     margin-left: 1rem;
+    background: #90ee90 !important;
   }
 
   &__pause,
@@ -41,7 +43,7 @@
 }
 
 .panel {
-  flex-grow: 2;
+  flex-grow: 8;
   background: utils.$tertiary-color;
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -55,6 +57,7 @@
   &__table {
     width: 100%;
     overflow-y: scroll;
+    font-size: 0.8rem;
     text-align: center;
 
     th,
@@ -70,9 +73,10 @@
 
 .button {
   background: utils.$primary-color;
-  @include utils.shadowed-border();
+  @include utils.shadowed-border($border-radius: 0.5rem);
   width: 6rem;
   height: 3rem;
+  font-family: inherit;
 
   &--round {
     border-radius: 50%;

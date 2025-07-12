@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/scripts/main.ts"></script>
   </head>
   <body>
     <div class="timer">
@@ -16,8 +16,12 @@
         <button class="button button--s timer__clockout ts-clockout">
           CLOCK OUT
         </button>
-        <button class="button button--s button--round timer__pause">O</button>
-        <button class="button button--s button--round timer__resume">O</button>
+        <button class="button button--s button--round timer__pause">
+          <img src="src\assets\icons\timer_pause.svg" />
+        </button>
+        <!-- <button class="button button--s button--round timer__resume">
+          <img src="src\assets\icons\timer_play.svg" />
+        </button> -->
       </div>
     </div>
 
