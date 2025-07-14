@@ -17,10 +17,10 @@
     transition-property: width, height, border-radius;
 
     // For when the button is clicked
-    &:hover {
-      border-radius: 50%;
-      width: 10rem;
-      height: 10rem;
+    &--active {
+      border-radius: 50% !important;
+      width: 10rem !important;
+      height: 10rem !important;
     }
   }
 
@@ -86,4 +86,13 @@
     width: 4.5rem;
     height: 2rem;
   }
+
+  &:active {
+    transform: translate(3px);
+    @include utils.shadowed-border($shadow-loc: 2px);
+  }
+}
+
+.hidden {
+  display: none;
 }

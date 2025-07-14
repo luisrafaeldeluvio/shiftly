@@ -8,20 +8,25 @@
   <body>
     <div class="timer">
       <div class="timer__time">
-        <button class="button timer__clockin ts-clockin">CLOCK IN</button>
-        <span class="timer__counter ts-elapsedtime"></span>
+        <button class="button timer__clockin ts-clockin">
+          <span class="timer__counter">Clock In</span>
+        </button>
       </div>
 
-      <div class="timer__controls">
+      <div class="timer__controls hidden">
         <button class="button button--s timer__clockout ts-clockout">
           CLOCK OUT
         </button>
-        <button class="button button--s button--round timer__pause">
+        <button
+          class="button button--s button--round timer__pause ts-timer-pause"
+        >
           <img src="src\assets\icons\timer_pause.svg" />
         </button>
-        <!-- <button class="button button--s button--round timer__resume">
+        <button
+          class="button button--s button--round timer__resume ts-timer-resume hidden"
+        >
           <img src="src\assets\icons\timer_play.svg" />
-        </button> -->
+        </button>
       </div>
     </div>
 
