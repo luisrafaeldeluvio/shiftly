@@ -12,7 +12,7 @@
     @include utils.flex-center();
   }
 
-  &__clockin {
+  &__timein {
     transition-duration: 0.25s;
     transition-property: width, height, border-radius;
 
@@ -30,7 +30,7 @@
     @include utils.flex-center();
   }
 
-  &__clockout {
+  &__timeout {
     flex-grow: 5;
     margin-left: 1rem;
     background: #90ee90 !important;
@@ -39,6 +39,9 @@
   &__pause,
   &__resume {
     width: 2rem !important;
+  }
+
+  &__timein-display {
   }
 }
 
