@@ -4,6 +4,7 @@ import { toggleTimer } from "./toggleTimer";
 export function initDomEvents(): void {
   const btn = document.querySelector(".ts-timein") as HTMLButtonElement;
   const timerControls: string[] = ["pause", "resume"];
+  const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
 
   btn.addEventListener("click", (): void => {
     const txt = btn.querySelector<HTMLSpanElement>(".timer__counter");
@@ -25,7 +26,10 @@ export function initDomEvents(): void {
 
     elem.addEventListener("click", (): void => {
       toggleTimer();
-      console.log(user.elapsedTime(user.timein, Date.now()));
     });
   }
+
+  stopButton.addEventListener("click", (): void => {
+    user.stopTime();
+  });
 }

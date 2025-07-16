@@ -1,3 +1,5 @@
+import { user } from "./main";
+
 export function toggleTimer(): void {
   const pauseButton = document.querySelector(
     ".ts-timer-pause",
@@ -8,6 +10,14 @@ export function toggleTimer(): void {
 
   const ispaused: boolean = pauseButton.classList.contains("hidden");
 
-  resumeButton.classList.toggle("hidden", ispaused);
-  pauseButton.classList.toggle("hidden", !ispaused);
+  if (ispaused) {
+    resumeButton.classList.toggle("hidden", ispaused);
+    pauseButton.classList.toggle("hidden", !ispaused);
+    user.resumeTime();
+  }
+  if (!ispaused) {
+    pauseButton.classList.toggle("hidden", !ispaused);
+    resumeButton.classList.toggle("hidden", ispaused);
+    user.pauseTime();
+  }
 }
