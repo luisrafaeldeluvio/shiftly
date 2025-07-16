@@ -1,3 +1,5 @@
+import { formatDate } from "./time";
+
 interface TimeEntry {
   date?: Date;
   in: number;
@@ -8,10 +10,15 @@ export class TimeLog {
   protected _time: TimeEntry;
   protected _pauseStart: number;
   protected _pauseTotalTime: number;
+  protected _isPaused: boolean;
+  protected _isRunning: boolean;
+
   constructor(time: TimeEntry) {
     this._time = time;
     this._pauseStart = 0;
     this._pauseTotalTime = 0;
+    this._isPaused = false;
+    this._isRunning = false;
   }
 
   get timein() {
@@ -31,9 +38,25 @@ export class TimeLog {
     this._time.out = time;
   }
 
-  public elapsedTime(start: number, end: number): number {
-    const pause = this._pauseTotalTime;
-    return (end - start - pause) / 1000;
+  get isPaused() {
+    return this._isPaused;
+  }
+
+  get isRunning() {
+    return this._isRunning;
+  }
+
+  public elapsedTime(start: number, end?: number): number {
+    let pause = this._pauseTotalTime;
+    if (end) {
+      if (pause === 0) {
+        pause += Date.now() - this._pauseStart;
+      }
+      console.log(end, start, pause);
+      return (end - start - pause) / 1000;
+    } else {
+      return (Date.now() - start - pause) / 1000;
+    }
   }
 
   public startTime(): void {
@@ -41,31 +64,25 @@ export class TimeLog {
     const timeinDisplayContainer = document.querySelector(
       ".ts-timein-display",
     ) as HTMLSpanElement;
-    const date = new Date(this._time.in);
-    timeinDisplayContainer.innerText = `April ${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    console.log(
-      `Time is started: ${this.elapsedTime(this._time.in, Date.now())}`,
-    );
+    timeinDisplayContainer.innerText = formatDate(this._time.in);
+    this._isRunning = true;
   }
 
   public stopTime(): void {
     this._time.out = Date.now();
-    console.log(
-      `Time is stopped: ${this.elapsedTime(this._time.in, Date.now())}`,
+    this._isRunning = false;
+    alert(
+      `Your total time is ${this.elapsedTime(this._time.in, this._time.out)}`,
     );
   }
 
   public pauseTime(): void {
     this._pauseStart = Date.now();
-    console.log(
-      `Time is paused: ${this.elapsedTime(this._time.in, Date.now())}`,
-    );
+    this._isPaused = true;
   }
 
   public resumeTime(): void {
     this._pauseTotalTime += Date.now() - this._pauseStart;
-    console.log(
-      `Time is resumed: ${this.elapsedTime(this._time.in, Date.now())}`,
-    );
+    this._isPaused = false;
   }
 }

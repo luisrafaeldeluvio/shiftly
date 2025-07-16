@@ -6,7 +6,7 @@ import "../style/nav.scss";
 
 import { TimeLog } from "./timeLog";
 import { initDomEvents } from "./domEvents";
-// import { toggleTimer } from "./toggleTimer";
+// import { formatDate } from "./time";
 
 const user = new TimeLog({
   in: 0,
@@ -16,6 +16,17 @@ const user = new TimeLog({
 // function stopTimer(): void {}
 
 initDomEvents();
+
+setInterval((): void => {
+  if (user.isRunning && !user.isPaused) {
+    const timerCounterContainer = document.querySelector(".timer__counter");
+    if (timerCounterContainer) {
+      timerCounterContainer.innerHTML = `${user.elapsedTime(user.timein)}`;
+    } else {
+      console.log(false);
+    }
+  }
+});
 
 export { user };
 
