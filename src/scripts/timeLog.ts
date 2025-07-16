@@ -49,9 +49,6 @@ export class TimeLog {
   public elapsedTime(start: number, end?: number): number {
     let pause = this._pauseTotalTime;
     if (end) {
-      if (pause === 0) {
-        pause += Date.now() - this._pauseStart;
-      }
       console.log(end, start, pause);
       return (end - start - pause) / 1000;
     } else {
@@ -71,6 +68,12 @@ export class TimeLog {
   public stopTime(): void {
     this._time.out = Date.now();
     this._isRunning = false;
+    console.log(this._pauseStart, this._isPaused);
+
+    if (this._pauseStart > 0 && this._isPaused) {
+      this.resumeTime();
+    }
+
     alert(
       `Your total time is ${this.elapsedTime(this._time.in, this._time.out)}`,
     );
@@ -79,9 +82,11 @@ export class TimeLog {
   public pauseTime(): void {
     this._pauseStart = Date.now();
     this._isPaused = true;
+    console.log(this._pauseStart / 1000);
   }
 
   public resumeTime(): void {
+    console.log("resumed time happened");
     this._pauseTotalTime += Date.now() - this._pauseStart;
     this._isPaused = false;
   }

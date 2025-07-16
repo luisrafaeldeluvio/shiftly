@@ -14,7 +14,7 @@ export function initDomEvents(): void {
     btn.classList.toggle("timer__timein--active", !isActive);
     controls?.classList.toggle("hidden", isActive);
     if (txt) {
-      txt.textContent = isActive ? "time In" : "00:00:00";
+      txt.textContent = isActive ? "TIME IN" : "00:00:00";
       user.startTime();
     }
   });
