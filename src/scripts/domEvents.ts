@@ -2,21 +2,28 @@ import { user } from "./main";
 import { toggleTimer } from "./toggleTimer";
 
 export function initDomEvents(): void {
-  const btn = document.querySelector(".ts-timein") as HTMLButtonElement;
-  const timerControls: string[] = ["pause", "resume"];
+  const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
   const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
+  const timerControls: string[] = ["pause", "resume"];
 
-  btn.addEventListener("click", (): void => {
-    const txt = btn.querySelector<HTMLSpanElement>(".timer__counter");
-    const controls = document.querySelector<HTMLElement>(".timer__controls");
+  function startTimein(): void {
+    const timerCounter = startButton.querySelector(
+      ".timer__counter",
+    ) as HTMLSpanElement;
+    const controls = document.querySelector(".timer__controls");
+    const isActive = startButton.classList.contains("timer__timein--active");
 
-    const isActive = btn.classList.contains("timer__timein--active");
-    btn.classList.toggle("timer__timein--active", !isActive);
+    startButton.classList.toggle("timer__timein--active", !isActive);
     controls?.classList.toggle("hidden", isActive);
-    if (txt) {
-      txt.textContent = isActive ? "TIME IN" : "00:00:00";
+
+    if (timerCounter) {
+      timerCounter.textContent = isActive ? "TIME IN" : "00:00:00";
       user.startTime();
     }
+  }
+
+  startButton.addEventListener("click", startTimein, {
+    once: true,
   });
 
   for (const element of timerControls) {
@@ -31,5 +38,26 @@ export function initDomEvents(): void {
 
   stopButton.addEventListener("click", (): void => {
     user.stopTime();
+
+    const timerCounter = startButton.querySelector(
+      ".timer__counter",
+    ) as HTMLSpanElement;
+    const timerTimeinDisplay = document.querySelector(
+      ".ts-timein-display",
+    ) as HTMLParagraphElement;
+    const controls = document.querySelector(".timer__controls");
+    const isActive = startButton.classList.contains("timer__timein--active");
+
+    startButton.classList.toggle("timer__timein--active", !isActive);
+    controls?.classList.toggle("hidden", isActive);
+    timerTimeinDisplay.innerHTML = "";
+
+    startButton.addEventListener("click", startTimein, {
+      once: true,
+    });
+
+    if (timerCounter) {
+      timerCounter.textContent = isActive ? "TIME IN" : "00:00:00";
+    }
   });
 }

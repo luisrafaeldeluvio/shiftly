@@ -73,10 +73,6 @@ export class TimeLog {
     if (this._pauseStart > 0 && this._isPaused) {
       this.resumeTime();
     }
-
-    alert(
-      `Your total time is ${this.elapsedTime(this._time.in, this._time.out)}`,
-    );
   }
 
   public pauseTime(): void {
