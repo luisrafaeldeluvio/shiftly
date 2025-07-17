@@ -1,4 +1,4 @@
-import { formatDate } from "./time";
+import dayjs from "dayjs";
 
 interface TimeEntry {
   date?: Date;
@@ -46,8 +46,9 @@ export class TimeLog {
     return this._isRunning;
   }
 
-  public elapsedTime(start: number, end?: number): number {
-    let pause = this._pauseTotalTime;
+  public elapsedTime(end?: number): number {
+    const pause = this._pauseTotalTime;
+    const start = this._time.in;
     if (end) {
       console.log(end, start, pause);
       return (end - start - pause) / 1000;
@@ -61,7 +62,9 @@ export class TimeLog {
     const timeinDisplayContainer = document.querySelector(
       ".ts-timein-display",
     ) as HTMLSpanElement;
-    timeinDisplayContainer.innerText = formatDate(this._time.in);
+    timeinDisplayContainer.innerText = dayjs(this._time.in).format(
+      "MMMM, DD HH:MM:ss",
+    );
     this._isRunning = true;
   }
 
@@ -74,7 +77,10 @@ export class TimeLog {
       this.resumeTime();
     }
 
-    console.log(this.timein, this.timeout, this.elapsedTime(this.timein));
+    this._pauseStart = 0;
+    this._pauseTotalTime = 0;
+
+    console.log(this.timein, this.timeout, this.elapsedTime());
   }
 
   public pauseTime(): void {
