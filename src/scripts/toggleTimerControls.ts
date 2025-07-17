@@ -1,6 +1,6 @@
 import { user } from "./main";
 
-export function toggleTimer(): void {
+export function toggleTimerControls(): void {
   const pauseButton = document.querySelector(
     ".ts-timer-pause",
   ) as HTMLButtonElement;

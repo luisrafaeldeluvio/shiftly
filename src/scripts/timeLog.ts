@@ -73,16 +73,16 @@ export class TimeLog {
     if (this._pauseStart > 0 && this._isPaused) {
       this.resumeTime();
     }
+
+    console.log(this.timein, this.timeout, this.elapsedTime(this.timein));
   }
 
   public pauseTime(): void {
     this._pauseStart = Date.now();
     this._isPaused = true;
-    console.log(this._pauseStart / 1000);
   }
 
   public resumeTime(): void {
-    console.log("resumed time happened");
     this._pauseTotalTime += Date.now() - this._pauseStart;
     this._isPaused = false;
   }
