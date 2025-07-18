@@ -1,95 +1,63 @@
-import dayjs from "dayjs";
-
-interface TimeEntry {
-  date?: Date;
-  in: number;
-  out: number;
-}
-
 export class TimeLog {
-  protected _time: TimeEntry;
-  protected _pauseStart: number;
-  protected _pauseTotalTime: number;
-  protected _isPaused: boolean;
-  protected _isRunning: boolean;
-
-  constructor(time: TimeEntry) {
-    this._time = time;
-    this._pauseStart = 0;
-    this._pauseTotalTime = 0;
-    this._isPaused = false;
-    this._isRunning = false;
-  }
-
-  get timein() {
-    return this._time.in;
-  }
-
-  set timein(time: number) {
-    this._time.in = time;
-    this._time.date = new Date(time);
-  }
-
-  get timeout() {
-    return this._time.out;
-  }
-
-  set timeout(time: number) {
-    this._time.out = time;
-  }
-
-  get isPaused() {
-    return this._isPaused;
-  }
-
-  get isRunning() {
-    return this._isRunning;
-  }
+  public date: Date | undefined = undefined;
+  public timein: number | undefined = undefined;
+  public timeout: number | undefined = undefined;
+  public pauseStart: number | undefined = undefined;
+  public pauseTotalTime: number = 0;
+  public isPaused: boolean = false;
+  public isRunning: boolean = false;
 
   public elapsedTime(end?: number): number {
-    const pause = this._pauseTotalTime;
-    const start = this._time.in;
-    if (end) {
-      console.log(end, start, pause);
-      return (end - start - pause) / 1000;
-    } else {
-      return (Date.now() - start - pause) / 1000;
+    const pause = this.pauseTotalTime;
+    const start = this.timein;
+
+    if (!start) {
+      return 0;
     }
+
+    return end ? end : Date.now() - start - pause;
   }
 
   public startTime(): void {
-    this._time.in = Date.now();
-    const timeinDisplayContainer = document.querySelector(
-      ".ts-timein-display",
-    ) as HTMLSpanElement;
-    timeinDisplayContainer.innerText = dayjs(this._time.in).format(
-      "MMMM, DD HH:MM:ss",
-    );
-    this._isRunning = true;
+    if (this.isRunning) {
+      return;
+    }
+
+    this.timein = Date.now();
+    this.isRunning = true;
   }
 
   public stopTime(): void {
-    this._time.out = Date.now();
-    this._isRunning = false;
-    console.log(this._pauseStart, this._isPaused);
+    if (!this.isRunning || !this.pauseStart) {
+      return;
+    }
 
-    if (this._pauseStart > 0 && this._isPaused) {
+    if (this.isPaused) {
       this.resumeTime();
     }
 
-    this._pauseStart = 0;
-    this._pauseTotalTime = 0;
+    this.timeout = Date.now();
+    this.isRunning = false;
 
-    console.log(this.timein, this.timeout, this.elapsedTime());
+    this.pauseStart = undefined;
+    this.pauseTotalTime = 0;
   }
 
   public pauseTime(): void {
-    this._pauseStart = Date.now();
-    this._isPaused = true;
+    if (!this.isRunning) {
+      return;
+    }
+
+    this.pauseStart = Date.now();
+    this.isPaused = true;
   }
 
   public resumeTime(): void {
-    this._pauseTotalTime += Date.now() - this._pauseStart;
-    this._isPaused = false;
+    if (!this.isRunning || !this.pauseStart) {
+      return;
+    }
+
+    this.pauseTotalTime += Date.now() - this.pauseStart;
+    this.isPaused = false;
   }
 }

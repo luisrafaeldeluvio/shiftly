@@ -8,10 +8,7 @@ import { TimeLog } from "./timeLog";
 import { initDomEvents } from "./domEvents";
 // import dayjs from "dayjs";
 
-const user = new TimeLog({
-  in: 0,
-  out: 0,
-});
+const user = new TimeLog();
 
 initDomEvents();
 
