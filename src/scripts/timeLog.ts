@@ -1,21 +1,25 @@
 export class TimeLog {
-  public date: Date | undefined = undefined;
   public timein: number | undefined = undefined;
   public timeout: number | undefined = undefined;
-  public pauseStart: number | undefined = undefined;
+  public pauseStartTime: number | undefined = undefined;
   public pauseTotalTime: number = 0;
   public isPaused: boolean = false;
   public isRunning: boolean = false;
 
-  public elapsedTime(end?: number): number {
-    const pause = this.pauseTotalTime;
-    const start = this.timein;
-
-    if (!start) {
+  public elapsedTime(): number {
+    if (!this.timein) {
       return 0;
     }
 
-    return end ? end : Date.now() - start - pause;
+    const end: number = this.timeout ?? Date.now();
+    let pauseCurrentTotalTime: number = 0;
+
+    if (this.isPaused && this.pauseStartTime) {
+      pauseCurrentTotalTime =
+        Date.now() - this.pauseStartTime + this.pauseTotalTime;
+    }
+
+    return end - this.timein - pauseCurrentTotalTime;
   }
 
   public startTime(): void {
@@ -28,36 +32,33 @@ export class TimeLog {
   }
 
   public stopTime(): void {
-    if (!this.isRunning || !this.pauseStart) {
-      return;
-    }
-
-    if (this.isPaused) {
-      this.resumeTime();
-    }
-
-    this.timeout = Date.now();
-    this.isRunning = false;
-
-    this.pauseStart = undefined;
-    this.pauseTotalTime = 0;
-  }
-
-  public pauseTime(): void {
     if (!this.isRunning) {
       return;
     }
 
-    this.pauseStart = Date.now();
+    console.log(this.elapsedTime());
+
+    this.resumeTime();
+    this.timeout = Date.now();
+    this.isRunning = false;
+  }
+
+  public pauseTime(): void {
+    if (!this.isRunning || this.isPaused) {
+      return;
+    }
+
+    this.pauseStartTime = Date.now();
     this.isPaused = true;
   }
 
   public resumeTime(): void {
-    if (!this.isRunning || !this.pauseStart) {
+    if (!this.isRunning || !this.pauseStartTime || !this.isPaused) {
       return;
     }
 
-    this.pauseTotalTime += Date.now() - this.pauseStart;
+    this.pauseTotalTime += Date.now() - this.pauseStartTime;
+    this.pauseStartTime = undefined;
     this.isPaused = false;
   }
 }
