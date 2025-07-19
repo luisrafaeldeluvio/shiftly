@@ -41,6 +41,9 @@ export class TimeLog {
     this.resumeTime();
     this.timeout = Date.now();
     this.isRunning = false;
+
+    this.pauseStart = undefined;
+    this.pauseTotalTime = 0;
   }
 
   public pauseTime(): void {
