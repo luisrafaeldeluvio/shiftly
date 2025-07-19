@@ -6,7 +6,7 @@ export class TimeLog {
   public isPaused: boolean = false;
   public isRunning: boolean = false;
 
-  public elapsedTime(): number {
+  public get elapsedTime(): number {
     if (!this.timein) {
       return 0;
     }
@@ -22,11 +22,27 @@ export class TimeLog {
     return end - this.timein - pauseCurrentTotalTime;
   }
 
+  public get time() {
+    if (this.isRunning) {
+      return undefined;
+    }
+
+    this.pauseStartTime = undefined;
+    this.pauseTotalTime = 0;
+
+    return {
+      timein: this.timein,
+      timeout: this.timeout,
+      total: this.elapsedTime,
+    };
+  }
+
   public startTime(): void {
     if (this.isRunning) {
       return;
     }
 
+    this.timeout = undefined;
     this.timein = Date.now();
     this.isRunning = true;
   }
@@ -36,14 +52,8 @@ export class TimeLog {
       return;
     }
 
-    console.log(this.elapsedTime());
-
-    this.resumeTime();
     this.timeout = Date.now();
     this.isRunning = false;
-
-    this.pauseStart = undefined;
-    this.pauseTotalTime = 0;
   }
 
   public pauseTime(): void {
