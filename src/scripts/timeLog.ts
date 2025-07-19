@@ -1,8 +1,7 @@
 export class TimeLog {
-  public date: Date | undefined = undefined;
   public timein: number | undefined = undefined;
   public timeout: number | undefined = undefined;
-  public pauseStart: number | undefined = undefined;
+  public pauseStartTime: number | undefined = undefined;
   public pauseTotalTime: number = 0;
   public isPaused: boolean = false;
   public isRunning: boolean = false;
@@ -28,7 +27,7 @@ export class TimeLog {
   }
 
   public stopTime(): void {
-    if (!this.isRunning || !this.pauseStart) {
+    if (!this.isRunning) {
       return;
     }
 
@@ -39,25 +38,26 @@ export class TimeLog {
     this.timeout = Date.now();
     this.isRunning = false;
 
-    this.pauseStart = undefined;
+    this.pauseStartTime = undefined;
     this.pauseTotalTime = 0;
   }
 
   public pauseTime(): void {
-    if (!this.isRunning) {
+    if (!this.isRunning || this.isPaused) {
       return;
     }
 
-    this.pauseStart = Date.now();
+    this.pauseStartTime = Date.now();
     this.isPaused = true;
   }
 
   public resumeTime(): void {
-    if (!this.isRunning || !this.pauseStart) {
+    if (!this.isRunning || !this.pauseStartTime || !this.isPaused) {
       return;
     }
 
-    this.pauseTotalTime += Date.now() - this.pauseStart;
+    this.pauseTotalTime += Date.now() - this.pauseStartTime;
+    this.pauseStartTime = undefined;
     this.isPaused = false;
   }
 }

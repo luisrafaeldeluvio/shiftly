@@ -3,13 +3,13 @@ import { toggleTimerControls } from "./toggleTimerControls";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
+const timerCounter = startButton.querySelector(
+  ".timer__counter",
+) as HTMLSpanElement;
+const controls = document.querySelector(".timer__controls") as HTMLDivElement;
 const timerControls: string[] = ["pause", "resume"];
 
 function toggleTimer(): void {
-  const timerCounter = startButton.querySelector(
-    ".timer__counter",
-  ) as HTMLSpanElement;
-  const controls = document.querySelector(".timer__controls") as HTMLDivElement;
   const isActive = startButton.classList.contains("timer__timein--active");
 
   startButton.classList.toggle("timer__timein--active", !isActive);
