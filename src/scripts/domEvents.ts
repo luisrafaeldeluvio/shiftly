@@ -1,5 +1,4 @@
 import { user } from "./main";
-import { toggleTimerControls } from "./toggleTimerControls";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
@@ -7,7 +6,6 @@ const timerCounter = startButton.querySelector(
   ".timer__counter",
 ) as HTMLSpanElement;
 const controls = document.querySelector(".timer__controls") as HTMLDivElement;
-const timerControls: string[] = ["pause", "resume"];
 
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__timein--active");
@@ -45,20 +43,7 @@ function addStopButtonEventListener(): void {
   });
 }
 
-function addControlButtonsEventListner(): void {
-  for (const element of timerControls) {
-    const elem = document.querySelector(
-      `.timer__${element}`,
-    ) as HTMLButtonElement;
-
-    elem.addEventListener("click", (): void => {
-      toggleTimerControls();
-    });
-  }
-}
-
 export function initDomEvents(): void {
   addStartButtonEventListener();
   addStopButtonEventListener();
-  addControlButtonsEventListner();
 }
