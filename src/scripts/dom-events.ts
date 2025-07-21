@@ -1,4 +1,4 @@
-import { user } from "./main";
+import { timer } from "./main";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
@@ -21,7 +21,7 @@ function addStartButtonEventListener(): void {
     "click",
     (): void => {
       toggleTimer();
-      user.startTime();
+      timer.start();
     },
     {
       once: true,
@@ -36,7 +36,7 @@ function addStopButtonEventListener(): void {
     ) as HTMLParagraphElement;
 
     timerTimeinDisplay.innerHTML = "";
-    user.stopTime();
+    timer.stop();
     toggleTimer();
 
     addStartButtonEventListener();

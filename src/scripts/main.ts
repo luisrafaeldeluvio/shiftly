@@ -4,23 +4,24 @@ import "../style/global.scss";
 import "../style/main.scss";
 import "../style/nav.scss";
 
-import { TimeLog } from "./timeLog";
-import { initDomEvents } from "./domEvents";
-// import dayjs from "dayjs";
+import { TimerEntry } from "./timer-entry";
+import { initDomEvents } from "./dom-events";
 
-const user = new TimeLog();
+const timer = new TimerEntry();
 
 initDomEvents();
 
 setInterval((): void => {
-  if (user.isRunning && !user.isPaused) {
+  if (timer.isRunning) {
     const timerCounterContainer = document.querySelector(".timer__counter");
     if (timerCounterContainer) {
-      timerCounterContainer.innerHTML = `${user.elapsedTime()}`;
+      timerCounterContainer.innerHTML = `${timer.elapsedTime}`;
     } else {
       console.log(false);
     }
   }
-});
 
-export { user };
+  console.log(timer.elapsedTime, timer.time);
+}, 1000);
+
+export { timer };
