@@ -16,7 +16,6 @@
     "vite-plugin-checker": "^0.10.0"
   },
   "dependencies": {
-    "dayjs": "^1.11.13",
     "dexie": "^4.0.11"
   }
 }
