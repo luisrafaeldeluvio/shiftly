@@ -1,10 +1,9 @@
 import { db } from "./db";
 import { formatElapsedTime } from "./format-date";
+import { formatTime } from "./format-date";
 
 const table = document.querySelector(".history__table") as HTMLTableElement;
 const tableBody = table.tBodies[0];
-
-console.log(table.tBodies[0]);
 
 interface TimerEntriesTime {
   initialTime: number;
@@ -20,9 +19,9 @@ interface UpdateHistoryParams {
 function createRow(entry: TimerEntriesTime) {
   const tableRow = document.createElement("tr");
   tableRow.innerHTML = `
-    <td>${entry.initialTime}</td>
-    <td>${entry.initialTime}</td>
-    <td>${entry.finalTime}</td>
+    <td>${formatTime("M/D/Y", entry.initialTime)}</td>
+    <td>${formatTime("H:M:S", entry.initialTime)}</td>
+    <td>${formatTime("H:M:S", entry.finalTime)}</td>
     <td>${formatElapsedTime(entry.finalTime - entry.initialTime)}</td>
   `;
   tableBody.append(tableRow);
