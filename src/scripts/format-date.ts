@@ -1,48 +1,33 @@
-export function formatElapsedTime(elapsedTime: number): string {
-  const elapsedTimeInSeconds = elapsedTime / 1000;
-  const seconds = Math.round(elapsedTimeInSeconds % 60)
-    .toString()
-    .padStart(2, "0");
-  const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60)
-    .toString()
-    .padStart(2, "0");
-  const hours = Math.floor(elapsedTimeInSeconds / 3600)
-    .toString()
-    .padStart(2, "0");
-
-  return `${hours}:${minutes}:${seconds}`;
+function padTwoDigits(num: number): string {
+  return num.toString().padStart(2, "0");
 }
 
-export function formatTime(format: string, dates: number): string {
-  const date = new Date(dates);
-  let formattedDate: any[] = [];
-  console.log(date);
+const formatTable: Record<string, (date: Date) => number> = {
+  M: (date) => date.getMonth() + 1,
+  D: (date) => date.getDate(),
+  Y: (date) => date.getFullYear(),
+  h: (date) => date.getHours(),
+  m: (date) => date.getMinutes(),
+  s: (date) => date.getSeconds(),
+};
 
-  for (let i = 0; i < format.length; i++) {
-    switch (format[i]) {
-      case "M":
-        formattedDate.push(date.getMonth().toString().padStart(2, "0"));
-        break;
-      case "D":
-        formattedDate.push(date.getDate().toString().padStart(2, "0"));
-        break;
-      case "Y":
-        formattedDate.push(date.getFullYear().toString().padStart(2, "0"));
-        break;
-      case "H":
-        formattedDate.push(date.getHours().toString().padStart(2, "0"));
-        break;
-      case "M":
-        formattedDate.push(date.getMinutes().toString().padStart(2, "0"));
-        break;
-      case "S":
-        formattedDate.push(date.getSeconds().toString().padStart(2, "0"));
-        break;
-      default:
-        formattedDate.push(format[i]);
-        break;
-    }
-  }
+function formatCharacter(char: string, date: Date): string {
+  return char in formatTable ? padTwoDigits(formatTable[char](date)) : char;
+}
 
-  return formattedDate.join("").toString();
+export function formatTime(formatPattern: string, timestamp: number): string {
+  const date = new Date(timestamp);
+
+  return [...formatPattern]
+    .map((char): string => formatCharacter(char, date))
+    .join("");
+}
+
+export function formatElapsedTime(elapsedTime: number): string {
+  const elapsedTimeInSeconds = elapsedTime / 1000;
+  const seconds = padTwoDigits(Math.round(elapsedTimeInSeconds % 60));
+  const minutes = padTwoDigits(Math.floor((elapsedTimeInSeconds % 3600) / 60));
+  const hours = padTwoDigits(Math.floor(elapsedTimeInSeconds / 3600));
+
+  return `${hours}:${minutes}:${seconds}`;
 }
