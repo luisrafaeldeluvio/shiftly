@@ -27,7 +27,7 @@ function createRow(entry: TimerEntriesTime) {
   tableBody.append(tableRow);
 }
 
-export function updateHistory(params?: UpdateHistoryParams): void {
+export function addHistory(params?: UpdateHistoryParams): void {
   db.timerEntries
     .reverse()
     .offset(params?.offset ?? 0)
@@ -41,4 +41,9 @@ export function updateHistory(params?: UpdateHistoryParams): void {
         });
       });
     });
+}
+
+export function updateHistory() {
+  tableBody.innerHTML = "";
+  addHistory();
 }
