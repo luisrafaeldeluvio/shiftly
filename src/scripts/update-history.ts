@@ -5,18 +5,18 @@ import { formatTime } from "./format-date";
 const table = document.querySelector(".history__table") as HTMLTableElement;
 const tableBody = table.tBodies[0];
 
-interface TimerEntriesTime {
+interface TimerEntry {
   initialTime: number;
   finalTime: number;
 }
 
-interface UpdateHistoryParams {
+interface LoadHistory {
   sort?: "initialTime" | "finalTime" | "id";
   amount?: number;
   offset?: number;
 }
 
-function createRow(entry: TimerEntriesTime) {
+function createRow(entry: TimerEntry) {
   const tableRow = document.createElement("tr");
   tableRow.innerHTML = `
     <td>${formatTime("M/D/Y", entry.initialTime)}</td>
@@ -27,7 +27,7 @@ function createRow(entry: TimerEntriesTime) {
   tableBody.append(tableRow);
 }
 
-export function addHistory(params?: UpdateHistoryParams): void {
+export function loadHistoryEntries(params?: LoadHistory): void {
   db.timerEntries
     .reverse()
     .offset(params?.offset ?? 0)
@@ -43,7 +43,7 @@ export function addHistory(params?: UpdateHistoryParams): void {
     });
 }
 
-export function updateHistory() {
+export function refreshHistoryEntries() {
   tableBody.innerHTML = "";
-  addHistory();
+  loadHistoryEntries();
 }

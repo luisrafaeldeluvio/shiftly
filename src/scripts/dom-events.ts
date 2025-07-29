@@ -1,5 +1,5 @@
 import { timer } from "./main";
-import { updateHistory } from "./update-history";
+import { refreshHistoryEntries } from "./update-history";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
@@ -38,7 +38,7 @@ function addStopButtonEventListener(): void {
 
     timerTimeinDisplay.innerHTML = "";
     timer.stop();
-    updateHistory();
+    refreshHistoryEntries();
     toggleTimer();
 
     addStartButtonEventListener();
