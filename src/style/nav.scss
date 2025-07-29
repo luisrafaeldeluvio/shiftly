@@ -1,23 +1,31 @@
 @use "utils";
 
 .nav {
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
   background: utils.$secondary-color;
-  width: 95%;
   @include utils.shadowed-border();
+  width: 95%;
 
   ul {
     display: flex;
+    position: relative;
     justify-content: space-around;
     align-items: center;
+    z-index: 1;
     height: 3rem;
     list-style-type: none;
-  }
 
-  &--active {
-    background: utils.$secondary-color;
-    padding: 1.25rem;
-    font-size: 1.25rem;
-    @include utils.shadowed-border($border-radius: 0.5rem);
+    .__slider {
+      top: -0.5rem;
+      mix-blend-mode: multiply;
+      transition: transform 0.25s ease;
+      background: #90ee90;
+      padding: 2rem;
+      @include utils.shadowed-border($border-radius: 0.5rem);
+      position: absolute;
+      left: 0;
+      z-index: 2;
+      height: 10px;
+    }
   }
 }
