@@ -1,5 +1,6 @@
 import { timer } from "./main";
 import { refreshHistoryEntries } from "./update-history";
+import { updateNavSliderPosition } from "./updateNavSliderPosition";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
@@ -46,41 +47,13 @@ function addStopButtonEventListener(): void {
   });
 }
 
-function moveNavSlider(id: string): void {
-  const nav = document.querySelector(".nav") as HTMLDivElement;
-  const navList = nav.querySelector("ul") as HTMLUListElement;
-  const navSlider = document.querySelector(".__slider") as HTMLDivElement;
-
-  const listWidth: Record<string, number> = {};
-  for (const item of navList.children) {
-    if (item.tagName === "DIV") {
-      continue;
-    }
-
-    listWidth[item.id] = item.clientWidth;
-  }
-
-  if (!(id in listWidth)) {
-    throw new Error(`"${id}" not found in ${Object.keys(listWidth)}`);
-  }
-
-  const selectedElem = document.querySelector(`#${id}`) as HTMLElement;
-  const calc =
-    selectedElem.getBoundingClientRect().left -
-    navList.getBoundingClientRect().left;
-
-  navSlider.style.transform = `translateX(calc(${calc}px - 1.4rem))`;
-
-  navSlider.style.width = `calc( ${listWidth[id]}px + 2.5rem)`;
-}
-
 function addNavEventListener(): void {
   for (const item of nav.children) {
     if (item.tagName === "DIV") {
       continue;
     }
     item.addEventListener("click", () => {
-      moveNavSlider(item.id);
+      updateNavSliderPosition(item.id);
     });
   }
 }
