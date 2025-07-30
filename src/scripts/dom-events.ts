@@ -7,6 +7,7 @@ const timerCounter = startButton.querySelector(
   ".timer__counter",
 ) as HTMLSpanElement;
 const controls = document.querySelector(".timer__controls") as HTMLDivElement;
+const nav = document.querySelector(".nav > ul") as HTMLUListElement;
 
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__timein--active");
@@ -73,15 +74,19 @@ function moveNavSlider(id: string): void {
   navSlider.style.width = `calc( ${listWidth[id]}px + 2.5rem)`;
 }
 
-const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
-moveNavSlider("navadd");
-await sleep(1500);
-moveNavSlider("navsettings");
-await sleep(1500);
-moveNavSlider("navstats");
+function addNavEventListener(): void {
+  for (const item of nav.children) {
+    if (item.tagName === "DIV") {
+      continue;
+    }
+    item.addEventListener("click", () => {
+      moveNavSlider(item.id);
+    });
+  }
+}
 
 export function initDomEvents(): void {
   addStartButtonEventListener();
   addStopButtonEventListener();
+  addNavEventListener();
 }
