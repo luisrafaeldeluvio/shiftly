@@ -10,7 +10,16 @@
 
 html,
 body {
-  background: utils.$secondary-color;
+  background:
+    linear-gradient(
+        90deg,
+        utils.$secondary-color calc(22px - 1px),
+        transparent 1%
+      )
+      center / 22px 22px,
+    linear-gradient(utils.$secondary-color calc(22px - 1px), transparent 1%)
+      center / 22px 22px,
+    rgba(43, 43, 43, 0.25);
   width: 100%;
   height: 100%;
   font-family: "Lexend Mega", sans-serif;

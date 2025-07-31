@@ -1,5 +1,5 @@
 $primary-color: #f4d738;
-$secondary-color: #fff4e8;
+$secondary-color: white;
 $tertiary-color: #87ceeb;
 
 @mixin flex-center() {
@@ -9,11 +9,11 @@ $tertiary-color: #87ceeb;
 }
 
 @mixin shadowed-border(
-  $border-size: 2px,
-  $border-radius: 1rem,
-  $shadow-loc: 3px
+  $border-size: 1.5px,
+  $border-radius: 0.25rem,
+  $shadow-loc: 5px
 ) {
-  box-shadow: $shadow-loc $shadow-loc 0px 1px #2b2b2b;
+  box-shadow: $shadow-loc $shadow-loc 0px -3px #2b2b2b;
   border: $border-size solid #2b2b2b;
   border-radius: $border-radius;
 }

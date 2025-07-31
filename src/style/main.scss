@@ -16,8 +16,8 @@
     transition-duration: 0.25s;
     transition-property: width, height, border-radius;
 
-    // For when the button is clicked
     &--active {
+      box-shadow: none !important;
       border-radius: 50% !important;
       width: 10rem !important;
       height: 10rem !important;
@@ -33,7 +33,8 @@
   &__timeout {
     flex-grow: 5;
     margin-left: 1rem;
-    background: #90ee90 !important;
+    background: utils.$secondary-color !important;
+    @include utils.shadowed-border();
   }
 }
 
@@ -68,7 +69,7 @@
 
 .button {
   background: utils.$primary-color;
-  @include utils.shadowed-border($border-radius: 0.5rem);
+  @include utils.shadowed-border();
   width: 6rem;
   height: 3rem;
   font-family: inherit;

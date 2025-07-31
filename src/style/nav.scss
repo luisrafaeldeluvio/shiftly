@@ -3,7 +3,7 @@
 .nav {
   // margin-bottom: 2rem;
   background: utils.$secondary-color;
-  @include utils.shadowed-border();
+  @include utils.shadowed-border($shadow-loc: 0);
   width: 95%;
 
   ul {
@@ -22,7 +22,7 @@
     transition: transform 0.25s ease;
     background: #90ee90;
     padding: 2rem;
-    @include utils.shadowed-border($border-radius: 0.5rem);
+    @include utils.shadowed-border();
     position: absolute;
     left: 0;
     z-index: 2;
