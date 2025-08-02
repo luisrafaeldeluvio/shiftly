@@ -1,6 +1,7 @@
 import { timer } from "./main";
 import { refreshHistoryEntries } from "./update-history";
 import { updateNavSliderPosition } from "./updateNavSliderPosition";
+import { changeActivePanel } from "./changeActivePanel";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
@@ -9,6 +10,7 @@ const timerCounter = startButton.querySelector(
 ) as HTMLSpanElement;
 const controls = document.querySelector(".timer__controls") as HTMLDivElement;
 const nav = document.querySelector(".nav > ul") as HTMLUListElement;
+const panelsList = document.querySelectorAll(".panel");
 
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__timein--active");
@@ -48,12 +50,16 @@ function addStopButtonEventListener(): void {
 }
 
 function addNavEventListener(): void {
-  for (const item of nav.children) {
-    if (item.tagName === "DIV") {
-      continue;
-    }
+  const PanelsNavRecord: Record<string, string> = {};
+
+  for (let i = 0; i < nav.children.length; i++) {
+    const item = nav.children[i];
+    if (item.tagName === "DIV") continue;
+    PanelsNavRecord[item.id] = panelsList[i].id;
+
     item.addEventListener("click", () => {
       updateNavSliderPosition(item.id);
+      changeActivePanel(PanelsNavRecord[item.id]);
     });
   }
 }

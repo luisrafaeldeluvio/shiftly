@@ -9,9 +9,7 @@ export function updateNavSliderPosition(id: string): void {
     listWidth[item.id] = item.clientWidth;
   }
 
-  if (!(id in listWidth)) {
-    throw new Error(`"${id}" not found in ${Object.keys(listWidth)}`);
-  }
+  if (!(id in listWidth)) return;
 
   const selectedNavItem = document.querySelector(`#${id}`) as HTMLLIElement;
   const offset =

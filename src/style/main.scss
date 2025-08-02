@@ -45,8 +45,13 @@
   scroll-behavior: smooth;
   scrollbar-width: none;
   @include utils.shadowed-border();
+  display: none;
   width: 95%;
   height: 10rem;
+
+  &--active {
+    display: block;
+  }
 }
 
 .history {
