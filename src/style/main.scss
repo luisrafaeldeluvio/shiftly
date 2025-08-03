@@ -33,67 +33,20 @@
   &__timeout {
     flex-grow: 5;
     margin-left: 1rem;
-    background: utils.$secondary-color !important;
+    background: utils.$color-white !important;
     @include utils.shadowed-border();
   }
 }
 
-.panel {
-  flex-grow: 8;
-  background: utils.$tertiary-color;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  @include utils.shadowed-border();
-  display: none;
-  width: 95%;
-  height: 10rem;
-
-  &--active {
-    display: block;
-  }
-}
-
-.history {
-  &__table {
-    width: 100%;
-    overflow-y: scroll;
-    font-size: 0.75rem;
-    text-align: center;
-
-    th,
-    td {
-      padding: 0.5rem;
-    }
-
-    tbody {
-      overflow: scroll;
-    }
-  }
-}
-
 .button {
-  background: utils.$primary-color;
+  background: utils.$color-yellow;
   @include utils.shadowed-border();
   width: 6rem;
   height: 3rem;
   font-family: inherit;
 
-  &--round {
-    border-radius: 50%;
-  }
-
   &--s {
     width: 4.5rem;
     height: 2rem;
   }
-
-  &:active {
-    transform: translate(3px);
-    @include utils.shadowed-border($shadow-loc: 2px);
-  }
-}
-
-.hidden {
-  display: none;
 }

@@ -1,30 +1,34 @@
 @use "utils";
-@import url("https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap");
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  size: 16px;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/lexend-mega-v26-latin-regular.woff2")
+    format("woff2");
+  font-family: "Lexend Mega";
+  font-display: swap;
 }
 
 html,
 body {
+  font-size: 16px;
+  @include utils.flex-center();
+  flex-direction: column;
+  gap: 2rem;
   background:
-    linear-gradient(
-        90deg,
-        utils.$secondary-color calc(22px - 1px),
-        transparent 1%
-      )
+    linear-gradient(90deg, utils.$color-white calc(22px - 1px), transparent 1%)
       center / 22px 22px,
-    linear-gradient(utils.$secondary-color calc(22px - 1px), transparent 1%)
+    linear-gradient(utils.$color-white calc(22px - 1px), transparent 1%)
       center / 22px 22px,
     rgba(43, 43, 43, 0.125);
   width: 100%;
   height: 100%;
   font-family: "Lexend Mega", sans-serif;
-  @include utils.flex-center();
-  flex-direction: column;
-  gap: 2rem;
   user-select: none;
 }
