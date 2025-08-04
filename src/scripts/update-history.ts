@@ -4,6 +4,7 @@ import { formatTime } from "./format-date";
 
 const table = document.querySelector(".history__table") as HTMLTableElement;
 const tableBody = table.tBodies[0];
+let totalEntriesLoaded = 0;
 
 interface TimerEntry {
   initialTime: number;
@@ -29,21 +30,31 @@ function createRow(entry: TimerEntry) {
 
 export function loadHistoryEntries(params?: LoadHistory): void {
   db.timerEntries
+    .orderBy(params?.sort ?? "id")
     .reverse()
     .offset(params?.offset ?? 0)
     .limit(params?.amount ?? 20)
-    .sortBy(params?.sort ?? "id")
+    .toArray()
     .then((entries) => {
       entries.forEach((entry) => {
         createRow({
           initialTime: entry.initialTime,
           finalTime: entry.finalTime,
         });
+        totalEntriesLoaded++;
       });
     });
 }
 
-export function refreshHistoryEntries() {
-  tableBody.innerHTML = "";
-  loadHistoryEntries();
+export function refreshHistoryEntries(offset: boolean = false) {
+  if (!offset) {
+    tableBody.innerHTML = "";
+    loadHistoryEntries({
+      offset: 0,
+    });
+  } else {
+    loadHistoryEntries({
+      offset: totalEntriesLoaded,
+    });
+  }
 }

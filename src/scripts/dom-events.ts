@@ -11,6 +11,7 @@ const timerCounter = startButton.querySelector(
 const controls = document.querySelector(".timer__controls") as HTMLDivElement;
 const nav = document.querySelector(".nav > ul") as HTMLUListElement;
 const panelsList = document.querySelectorAll(".panel");
+const historyPanel = document.querySelector(".history");
 
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__timein--active");
@@ -64,8 +65,28 @@ function addNavEventListener(): void {
   }
 }
 
+function isElementScrollableFinished(element: Element): boolean {
+  if (
+    Math.abs(element.scrollHeight - element.clientHeight - element.scrollTop) <=
+    1
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function addHistoryEventListener(): void {
+  historyPanel?.addEventListener("scroll", () => {
+    if (!isElementScrollableFinished(historyPanel)) return;
+
+    refreshHistoryEntries(true);
+  });
+}
+
 export function initDomEvents(): void {
   addStartButtonEventListener();
   addStopButtonEventListener();
   addNavEventListener();
+  addHistoryEventListener();
 }
