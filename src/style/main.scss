@@ -33,7 +33,7 @@
   &__timeout {
     flex-grow: 5;
     margin-left: 1rem;
-    background: utils.$color-white !important;
+    background: utils.$color-red !important;
     @include utils.shadowed-border();
   }
 }

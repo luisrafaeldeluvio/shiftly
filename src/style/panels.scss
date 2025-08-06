@@ -3,12 +3,9 @@
 .panel {
   display: none;
   flex-grow: 8;
-  background: utils.$color-blue;
   width: 95%;
   height: 10rem;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  overflow: hidden;
   @include utils.shadowed-border();
 
   &--active {
@@ -17,9 +14,18 @@
 }
 
 .history {
+  background: utils.$color-cyan;
+  padding-bottom: 1rem;
+
+  &__container {
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
   &__table {
     width: 100%;
-    overflow-y: scroll;
     font-size: 0.75rem;
     text-align: center;
 
@@ -32,4 +38,12 @@
       overflow: scroll;
     }
   }
+}
+
+.add {
+  background: utils.$color-blue;
+}
+
+.settings {
+  background: utils.$color-green;
 }

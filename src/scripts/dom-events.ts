@@ -11,7 +11,7 @@ const timerCounter = startButton.querySelector(
 const controls = document.querySelector(".timer__controls") as HTMLDivElement;
 const nav = document.querySelector(".nav > ul") as HTMLUListElement;
 const panelsList = document.querySelectorAll(".panel");
-const historyPanel = document.querySelector(".history");
+const historyPanel = document.querySelector(".history__container");
 
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__timein--active");

@@ -19,7 +19,7 @@
   &__slider {
     mix-blend-mode: multiply;
     transition: transform 0.25s ease;
-    background: utils.$color-pink;
+    background: utils.$color-magenta;
     padding: 2rem;
     @include utils.shadowed-border();
     position: absolute;
