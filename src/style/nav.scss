@@ -1,7 +1,7 @@
 @use "utils";
 
 .nav {
-  background: utils.$color-white;
+  background: utils.$gray-05;
   width: 95%;
   @include utils.shadowed-border($shadow-loc: 0);
   margin-bottom: 1rem;
@@ -18,8 +18,8 @@
 
   &__slider {
     mix-blend-mode: multiply;
-    transition: transform 0.25s ease;
-    background: utils.$color-magenta;
+    transition: transform 0.125s ease;
+    background: utils.$gray-20;
     padding: 2rem;
     @include utils.shadowed-border();
     position: absolute;

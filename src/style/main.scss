@@ -15,6 +15,8 @@
   &__timein {
     transition-duration: 0.25s;
     transition-property: width, height, border-radius;
+    background: utils.$gray-10 !important;
+    color: utils.$gray-80;
 
     &--active {
       box-shadow: none !important;
@@ -33,13 +35,14 @@
   &__timeout {
     flex-grow: 5;
     margin-left: 1rem;
-    background: utils.$color-red !important;
+    background: utils.$gray-80 !important;
+    color: utils.$white !important;
     @include utils.shadowed-border();
   }
 }
 
 .button {
-  background: utils.$color-yellow;
+  background: utils.$white;
   @include utils.shadowed-border();
   width: 6rem;
   height: 3rem;
