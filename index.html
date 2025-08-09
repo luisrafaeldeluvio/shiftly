@@ -22,6 +22,8 @@
         <button class="button button--s timer__timeout ts-timeout">
           TIME OUT
         </button>
+        <button class="button button--s">P</button>
+        <button class="button button--s">R</button>
       </div>
     </div>
 
@@ -32,6 +34,7 @@
         <table class="history__table">
           <thead>
             <tr>
+              <th>Date</th>
               <th>Date</th>
               <th>Time in</th>
               <th>Time out</th>
@@ -46,11 +49,37 @@
     <div id="panelsettings" class="panel settings">Settings</div>
 
     <div class="nav">
-      <ul>
-        <li id="navadd">Add</li>
-        <li id="navstats">Stats</li>
-        <li id="navsettings">Settings</li>
-        <div class="nav__slider"></div>
+      <ul class="nav__list nav__main">
+        <li>
+          <img
+            src="src\assets\icons\history_16dp_3C3C3C_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="History"
+          />
+          <!-- <span>History</span> -->
+        </li>
+        <li id="navstats">
+          <img
+            src="src\assets\icons\analytics_16dp_3C3C3C_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="Stats"
+          />
+          <!-- <span>Analytics</span> -->
+        </li>
+        <li id="navsettings">
+          <img
+            src="src\assets\icons\settings_16dp_3C3C3C_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="settings"
+          />
+          <!-- <span>Settings</span> -->
+        </li>
+      </ul>
+
+      <ul class="nav__list nav__sub">
+        <li id="navadd">
+          <img
+            src="src/assets/icons/add_16dp_3C3C3C_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="Add"
+          />
+        </li>
       </ul>
     </div>
   </body>

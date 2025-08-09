@@ -1,29 +1,48 @@
 @use "utils";
 
 .nav {
-  background: utils.$gray-05;
-  width: 95%;
-  @include utils.shadowed-border($shadow-loc: 0);
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
+  width: 95%;
 
-  ul {
+  &__list {
     display: flex;
-    position: relative;
     justify-content: space-around;
     align-items: center;
-    z-index: 1;
     height: 3rem;
     list-style-type: none;
+    @include utils.shadowed-border($shadow-loc: 0, $border-radius: 2rem);
+    gap: 5rem;
+    background: utils.$gray-05;
+    padding: 1rem;
   }
 
-  &__slider {
-    mix-blend-mode: multiply;
-    transition: transform 0.125s ease;
-    background: utils.$gray-20;
-    padding: 2rem;
-    @include utils.shadowed-border();
-    position: absolute;
-    left: 0;
-    z-index: 2;
+  // &__slider {
+  //   mix-blend-mode: multiply;
+  //   transition: transform 0.125s ease;
+  //   background: utils.$gray-20;
+  //   padding: 2rem;
+  //   @include utils.shadowed-border();
+  //   position: absolute;
+  //   left: 0;
+  //   z-index: 2;
+  // }
+
+  &__main {
+  }
+
+  &__sub {
+    border-radius: 50% !important;
+  }
+
+  ul > li > span {
+    font-size: 0.5rem;
+  }
+
+  ul > li > img {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
