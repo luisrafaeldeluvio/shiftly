@@ -1,7 +1,6 @@
 import { timer } from "./main";
 import { refreshHistoryEntries } from "./update-history";
-import { updateNavSliderPosition } from "./updateNavSliderPosition";
-import { changeActivePanel } from "./changeActivePanel";
+// import { changeActivePanel } from "./changeActivePanel";
 
 const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
 const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
@@ -50,17 +49,34 @@ function addStopButtonEventListener(): void {
   });
 }
 
-function addNavEventListener(): void {
+function getNavItems(navElement: HTMLElement): {} {
   const PanelsNavRecord: Record<string, string> = {};
 
-  for (let i = 0; i < nav.children.length; i++) {
-    const item = nav.children[i];
-    if (item.tagName === "DIV") continue;
-    PanelsNavRecord[item.id] = panelsList[i].id;
+  if (!navElement.childElementCount) return {};
 
-    item.addEventListener("click", () => {
-      updateNavSliderPosition(item.id);
-      changeActivePanel(PanelsNavRecord[item.id]);
+  for (let i = 0; i < navElement.children.length; i++) {
+    const item = navElement.children[i];
+    PanelsNavRecord[item.id] = panelsList[i].id;
+  }
+
+  console.log(PanelsNavRecord);
+
+  return PanelsNavRecord;
+}
+
+function addNavEventListener(): void {
+  const navItems = getNavItems(nav);
+
+  for (const itemId in navItems) {
+    const navItem = document.querySelector(`#${itemId}`) as HTMLElement;
+
+    navItem.addEventListener("click", () => {
+      // changeActivePanel(PanelsNavRecord[item.id]);
+      for (const i in navItems) {
+        const j = document.querySelector(`#${i}`) as HTMLElement;
+        j.querySelector("span")?.classList.add("hidden");
+      }
+      navItem.querySelector("span")?.classList.remove("hidden");
     });
   }
 }
