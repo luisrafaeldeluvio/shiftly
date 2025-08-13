@@ -1,37 +1,38 @@
 @use "utils";
 
 .timer {
+  @include utils.flex-center();
   flex-grow: 1;
   flex-direction: column;
-  width: 100%;
-  @include utils.flex-center();
   transition: all 0.25s ease;
+  width: 100%;
 
   &--collapsed {
+    flex-grow: 0;
     flex-direction: row;
-    transform: translateX(-7.5rem) translateY(-1rem);
+    justify-content: flex-start;
+    padding: 0.5rem 0.5rem 0 0.5rem;
 
-    * {
-      font-size: 0.75rem !important ;
+    span {
+      font-size: 0.5rem;
     }
   }
 
-  &__time {
+  &__clock {
     height: 100%;
     @include utils.flex-center();
   }
 
-  &__timein {
+  &__start {
     transition:
       width 0.25s,
       height 0.25s,
       border-radius 0.25s;
-    background: utils.$gray-10 !important;
+    background: utils.$gray-10;
     color: utils.$gray-80;
+    @include utils.flex-center();
 
     &--active {
-      box-shadow: none !important;
-      border-radius: 50% !important;
       width: 10rem !important;
       height: 10rem !important;
     }
@@ -43,20 +44,19 @@
     @include utils.flex-center();
 
     &--collapsed {
-      width: auto !important;
-
-      > button {
-        border-radius: 50% !important;
-      }
+      width: auto;
     }
   }
 
-  &__timeout {
+  &__stop {
     flex-grow: 5;
-    margin-left: 1rem;
+    margin-left: 0.25rem;
     background: utils.$gray-80 !important;
-    color: utils.$white !important;
     @include utils.shadowed-border();
+
+    span {
+      color: utils.$white !important;
+    }
   }
 }
 
@@ -68,6 +68,11 @@
   font-family: inherit;
 
   &--s {
+    width: 4rem !important;
+    height: 2rem !important;
+  }
+
+  &--xs {
     width: 1.5rem !important;
     height: 2rem !important;
   }

@@ -1,11 +1,14 @@
 import { timer } from "./main";
 import { refreshHistoryEntries } from "./update-history";
 // import { changeActivePanel } from "./changeActivePanel";
+import { toggleTimerCollapse } from "./collapseTimer";
 
-const startButton = document.querySelector(".ts-timein") as HTMLButtonElement;
-const stopButton = document.querySelector(".ts-timeout") as HTMLButtonElement;
-const timerCounter = startButton.querySelector(
-  ".timer__counter",
+const startButton = document.querySelector(
+  ".ts-timestart",
+) as HTMLButtonElement;
+const stopButton = document.querySelector(".ts-timestop") as HTMLButtonElement;
+const timerDisplay = startButton.querySelector(
+  ".ts-timer-display",
 ) as HTMLSpanElement;
 const controls = document.querySelector(".timer__controls") as HTMLDivElement;
 const nav = document.querySelector(".nav > ul") as HTMLUListElement;
@@ -13,12 +16,12 @@ const panelsList = document.querySelectorAll(".panel");
 const historyPanel = document.querySelector(".history__container");
 
 function toggleTimer(): void {
-  const isActive = startButton.classList.contains("timer__timein--active");
+  const isActive = startButton.classList.contains("timer__start--active");
 
-  startButton.classList.toggle("timer__timein--active", !isActive);
+  startButton.classList.toggle("timer__start--active", !isActive);
   controls.classList.toggle("hidden", isActive);
 
-  timerCounter.textContent = isActive ? "TIME IN" : "00:00:00";
+  if (isActive) timerDisplay.textContent = "TIME IN";
 }
 
 function addStartButtonEventListener(): void {
@@ -36,11 +39,7 @@ function addStartButtonEventListener(): void {
 
 function addStopButtonEventListener(): void {
   stopButton.addEventListener("click", (): void => {
-    const timerTimeinDisplay = document.querySelector(
-      ".ts-timein-display",
-    ) as HTMLParagraphElement;
-
-    timerTimeinDisplay.innerHTML = "";
+    timerDisplay.innerHTML = "";
     timer.stop();
     refreshHistoryEntries();
     toggleTimer();
@@ -97,6 +96,7 @@ function addHistoryEventListener(): void {
     if (!isElementScrollableFinished(historyPanel)) return;
 
     refreshHistoryEntries(true);
+    toggleTimerCollapse();
   });
 }
 

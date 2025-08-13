@@ -10,18 +10,37 @@
   </head>
   <body>
     <div class="timer">
-      <div class="timer__time">
-        <button class="button timer__timein ts-timein">
-          <p class="timer__timein-display ts-timein-display"></p>
-
-          <span class="timer__counter">TIME In</span>
+      <div class="timer__clock">
+        <button type="button" class="button timer__start ts-timestart">
+          <span class="ts-timer-display">TIME IN</span>
         </button>
       </div>
 
       <div class="timer__controls hidden">
-        <button class="button button--s timer__timeout ts-timeout">T</button>
-        <button class="button button--s button--round">P</button>
-        <button class="button button--s button--round hidden">R</button>
+        <button type="button" class="button button--xs timer__stop ts-timestop">
+          <span>TIME OUT</span>
+          <img
+            class="hidden"
+            src="src\assets\icons\stop_16dp_FFFFFF_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="Time Out"
+          />
+        </button>
+        <button
+          type="button"
+          class="button button--xs button--round ts-timerpauseresume"
+        >
+          <img
+            class="icon__pause"
+            src="src\assets\icons\pause_16dp_3C3C3C_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="Pause"
+          />
+
+          <img
+            class="icon__resume hidden"
+            src="src\assets\icons\resume_16dp_3C3C3C_FILL0_wght400_GRAD0_opsz20.svg"
+            alt="Resume"
+          />
+        </button>
       </div>
     </div>
 
