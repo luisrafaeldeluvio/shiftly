@@ -9,6 +9,7 @@ let totalEntriesLoaded = 0;
 interface TimerEntry {
   initialTime: number;
   finalTime: number;
+  totalPause: number;
 }
 
 interface LoadHistory {
@@ -23,7 +24,7 @@ function createRow(entry: TimerEntry) {
     <td>${formatTime("M/D/Y", entry.initialTime)}</td>
     <td>${formatTime("h:m:s", entry.initialTime)}</td>
     <td>${formatTime("h:m:s", entry.finalTime)}</td>
-    <td>${formatElapsedTime(entry.finalTime - entry.initialTime)}</td>
+    <td>${formatElapsedTime(entry.finalTime - entry.initialTime - entry.totalPause)}</td>
   `;
   tableBody.append(tableRow);
 }
@@ -40,6 +41,7 @@ export function loadHistoryEntries(params?: LoadHistory): void {
         createRow({
           initialTime: entry.initialTime,
           finalTime: entry.finalTime,
+          totalPause: entry.totalPause,
         });
         totalEntriesLoaded++;
       });

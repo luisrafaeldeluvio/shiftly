@@ -14,6 +14,9 @@ const controls = document.querySelector(".timer__controls") as HTMLDivElement;
 const nav = document.querySelector(".nav > ul") as HTMLUListElement;
 const panelsList = document.querySelectorAll(".panel");
 const historyPanel = document.querySelector(".history__container");
+const toggleTimerPauseResume = document.querySelector(
+  ".ts-timerpauseresume",
+) as HTMLButtonElement;
 
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__start--active");
@@ -22,6 +25,20 @@ function toggleTimer(): void {
   controls.classList.toggle("hidden", isActive);
 
   if (isActive) timerDisplay.textContent = "TIME IN";
+}
+
+function toggleTimerControls(): void {
+  if (timer.isPaused) {
+    timer.resume();
+  } else {
+    timer.pause();
+  }
+}
+
+function addControlButtonEventListener(): void {
+  toggleTimerPauseResume.addEventListener("click", (): void => {
+    toggleTimerControls();
+  });
 }
 
 function addStartButtonEventListener(): void {
@@ -105,4 +122,5 @@ export function initDomEvents(): void {
   addStopButtonEventListener();
   addNavEventListener();
   addHistoryEventListener();
+  addControlButtonEventListener();
 }
