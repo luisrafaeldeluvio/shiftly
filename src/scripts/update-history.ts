@@ -22,8 +22,8 @@ function createRow(entry: TimerEntry) {
   const tableRow = document.createElement("tr");
   tableRow.innerHTML = `
     <td>${formatTime("M/D/Y", entry.initialTime)}</td>
-    <td>${formatTime("h:m:s", entry.initialTime)}</td>
-    <td>${formatTime("h:m:s", entry.finalTime)}</td>
+    <td>${formatTime("h:m", entry.initialTime)}</td>
+    <td>${formatTime("h:m", entry.finalTime)}</td>
     <td>${formatElapsedTime(entry.finalTime - entry.initialTime - entry.totalPause)}</td>
   `;
   tableBody.append(tableRow);

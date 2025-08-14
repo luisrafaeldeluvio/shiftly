@@ -50,7 +50,7 @@
 
   &__stop {
     flex-grow: 5;
-    margin-left: 0.25rem;
+    margin-left: 0.75rem;
     background: utils.$gray-80 !important;
     @include utils.shadowed-border();
 
@@ -66,6 +66,7 @@
   width: 6rem;
   height: 3rem;
   font-family: inherit;
+  @include utils.flex-center();
 
   &--s {
     width: 4rem !important;
@@ -74,7 +75,7 @@
 
   &--xs {
     width: 1.5rem !important;
-    height: 2rem !important;
+    height: 1.5rem !important;
   }
 
   &--round {

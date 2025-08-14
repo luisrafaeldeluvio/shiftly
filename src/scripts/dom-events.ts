@@ -18,6 +18,32 @@ const toggleTimerPauseResume = document.querySelector(
   ".ts-timerpauseresume",
 ) as HTMLButtonElement;
 
+function isElementScrollableFinished(element: Element): boolean {
+  if (
+    Math.abs(element.scrollHeight - element.clientHeight - element.scrollTop) <=
+    1
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function getNavItems(navElement: HTMLElement): {} {
+  const PanelsNavRecord: Record<string, string> = {};
+
+  if (!navElement.childElementCount) return {};
+
+  for (let i = 0; i < navElement.children.length; i++) {
+    const item = navElement.children[i];
+    PanelsNavRecord[item.id] = panelsList[i].id;
+  }
+
+  console.log(PanelsNavRecord);
+
+  return PanelsNavRecord;
+}
+
 function toggleTimer(): void {
   const isActive = startButton.classList.contains("timer__start--active");
 
@@ -27,12 +53,26 @@ function toggleTimer(): void {
   if (isActive) timerDisplay.textContent = "TIME IN";
 }
 
+function toggleTimerControlsIcon(): void {
+  const timerPauseIcon = document.querySelector(
+    ".ts-timer-pause-icon",
+  ) as HTMLImageElement;
+  const timerResumeIcon = document.querySelector(
+    ".ts-timer-resume-icon",
+  ) as HTMLImageElement;
+
+  timerPauseIcon.classList.toggle("hidden");
+  timerResumeIcon.classList.toggle("hidden");
+}
+
 function toggleTimerControls(): void {
   if (timer.isPaused) {
     timer.resume();
   } else {
     timer.pause();
   }
+
+  toggleTimerControlsIcon();
 }
 
 function addControlButtonEventListener(): void {
@@ -65,21 +105,6 @@ function addStopButtonEventListener(): void {
   });
 }
 
-function getNavItems(navElement: HTMLElement): {} {
-  const PanelsNavRecord: Record<string, string> = {};
-
-  if (!navElement.childElementCount) return {};
-
-  for (let i = 0; i < navElement.children.length; i++) {
-    const item = navElement.children[i];
-    PanelsNavRecord[item.id] = panelsList[i].id;
-  }
-
-  console.log(PanelsNavRecord);
-
-  return PanelsNavRecord;
-}
-
 function addNavEventListener(): void {
   const navItems = getNavItems(nav);
 
@@ -96,24 +121,27 @@ function addNavEventListener(): void {
     });
   }
 }
-
-function isElementScrollableFinished(element: Element): boolean {
-  if (
-    Math.abs(element.scrollHeight - element.clientHeight - element.scrollTop) <=
-    1
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
+let isTimerCollapsed: boolean = false;
 function addHistoryEventListener(): void {
   historyPanel?.addEventListener("scroll", () => {
     if (!isElementScrollableFinished(historyPanel)) return;
+    console.log(true);
 
     refreshHistoryEntries(true);
-    toggleTimerCollapse();
+
+    // BUG:
+    //   after logging a new timer, the scroll stops working
+
+    // isTimerCollapsed = false;
+  });
+
+  historyPanel?.addEventListener("scroll", () => {
+    if (isTimerCollapsed) {
+      return;
+    } else {
+      toggleTimerCollapse();
+      isTimerCollapsed = true;
+    }
   });
 }
 
