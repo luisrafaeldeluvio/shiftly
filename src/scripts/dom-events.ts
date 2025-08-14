@@ -1,6 +1,6 @@
 import { timer } from "./main";
 import { refreshHistoryEntries } from "./update-history";
-// import { changeActivePanel } from "./changeActivePanel";
+import { changeActivePanel } from "./changeActivePanel";
 import { toggleTimerCollapse } from "./collapseTimer";
 
 const startButton = document.querySelector(
@@ -29,7 +29,7 @@ function isElementScrollableFinished(element: Element): boolean {
   }
 }
 
-function getNavItems(navElement: HTMLElement): {} {
+function getNavItems(navElement: HTMLElement) {
   const PanelsNavRecord: Record<string, string> = {};
 
   if (!navElement.childElementCount) return {};
@@ -112,7 +112,7 @@ function addNavEventListener(): void {
     const navItem = document.querySelector(`#${itemId}`) as HTMLElement;
 
     navItem.addEventListener("click", () => {
-      // changeActivePanel(PanelsNavRecord[item.id]);
+      changeActivePanel(navItems[itemId]);
       for (const i in navItems) {
         const j = document.querySelector(`#${i}`) as HTMLElement;
         j.querySelector("span")?.classList.add("hidden");
