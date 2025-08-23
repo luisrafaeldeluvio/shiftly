@@ -2,6 +2,7 @@ import { timer } from "./main";
 import { refreshHistoryEntries } from "./update-history";
 import { changeActivePanel } from "./changeActivePanel";
 import { TimerUIController } from "./timer-ui.ts";
+import { getNavItems } from "./helpers/get-nav-items.ts";
 
 const timerUIController = new TimerUIController();
 
@@ -13,7 +14,7 @@ const timerDisplay = startButton.querySelector(
   ".ts-timer-display",
 ) as HTMLSpanElement;
 const nav = document.querySelector(".nav > ul") as HTMLUListElement;
-const panelsList = document.querySelectorAll(".panel");
+
 const historyPanel = document.querySelector(".history__container");
 const toggleTimerPauseResume = document.querySelector(
   ".ts-timerpauseresume",
@@ -29,21 +30,6 @@ function isElementScrollableFinished(element: Element): boolean {
   } else {
     return false;
   }
-}
-
-function getNavItems(navElement: HTMLElement) {
-  const PanelsNavRecord: Record<string, string> = {};
-
-  if (!navElement.childElementCount) return {};
-
-  for (let i = 0; i < navElement.children.length; i++) {
-    const item = navElement.children[i];
-    PanelsNavRecord[item.id] = panelsList[i].id;
-  }
-
-  console.log(PanelsNavRecord);
-
-  return PanelsNavRecord;
 }
 
 function addControlButtonEventListener(): void {
@@ -71,7 +57,6 @@ function addStopButtonEventListener(): void {
     timer.stop();
     refreshHistoryEntries();
     timerUIController.toggle();
-
     addStartButtonEventListener();
   });
 }

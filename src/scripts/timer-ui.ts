@@ -1,5 +1,5 @@
 import { timer } from "./main";
-import { getElement } from "./getElement";
+import { getElement } from "./helpers/get-element";
 
 export class TimerUIController {
   private readonly timer: Element;

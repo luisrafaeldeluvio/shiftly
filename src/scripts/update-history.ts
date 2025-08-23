@@ -1,6 +1,6 @@
 import { db } from "./db";
-import { formatElapsedTime } from "./format-date";
-import { formatTime } from "./format-date";
+import { formatElapsedTime } from "./helpers/format-date";
+import { formatTime } from "./helpers/format-date";
 
 const table = document.querySelector(".history__table") as HTMLTableElement;
 const tableBody = table.tBodies[0];
