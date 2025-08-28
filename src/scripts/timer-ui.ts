@@ -2,22 +2,32 @@ import { timer } from "./main";
 import { getElement } from "./helpers/get-element";
 
 export class TimerUIController {
-  private readonly timer: Element;
-  private readonly controls: Element;
-  private readonly startButton: Element;
-  private readonly stopButton: Element;
-  private readonly pauseIcon: Element;
-  private readonly resumeIcon: Element;
-  private readonly display: Element;
+  private readonly timer: Element = getElement(".timer");
+  private readonly controls: Element = getElement(
+    ".timer__controls",
+    this.timer,
+  );
+  private readonly startButton: Element = getElement(
+    ".ts-timestart",
+    this.timer,
+  );
+  private readonly stopButton: Element = getElement(".ts-timestop", this.timer);
+  private readonly pauseIcon: Element = getElement(
+    ".ts-timer-pause-icon",
+    this.timer,
+  );
+  private readonly resumeIcon: Element = getElement(
+    ".ts-timer-resume-icon",
+    this.timer,
+  );
+  private readonly display: Element = getElement(
+    ".ts-timer-display",
+    this.timer,
+  );
+  isTimerCollapsed: boolean = false;
 
-  constructor() {
-    this.timer = getElement(".timer");
-    this.controls = getElement(".timer__controls", this.timer);
-    this.startButton = getElement(".ts-timestart", this.timer);
-    this.stopButton = getElement(".ts-timestop", this.timer);
-    this.pauseIcon = getElement(".ts-timer-pause-icon", this.timer);
-    this.resumeIcon = getElement(".ts-timer-resume-icon", this.timer);
-    this.display = getElement(".ts-timer-display", this.timer);
+  setDisplay(text: string | number): void {
+    this.display.textContent = text.toString();
   }
 
   toggle(): void {
@@ -28,7 +38,7 @@ export class TimerUIController {
     this.startButton.classList.toggle("timer__start--active", !isActive);
     this.controls.classList.toggle("hidden", isActive);
 
-    if (isActive) this.display.textContent = "TIME IN";
+    if (isActive) this.setDisplay("TIME IN");
   }
 
   private toggleControlsIcon(): void {
@@ -53,5 +63,7 @@ export class TimerUIController {
 
     this.stopButton.querySelector("span")?.classList.toggle("hidden");
     this.stopButton.querySelector("img")?.classList.toggle("hidden");
+
+    this.isTimerCollapsed = !this.isTimerCollapsed;
   }
 }
