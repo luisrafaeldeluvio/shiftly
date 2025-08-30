@@ -1,6 +1,6 @@
 import { db } from "./db";
 
-export class TimerEntry {
+class TimerEntry {
   private initialTime: number | undefined = undefined;
   private finalTime: number | undefined = undefined;
   public pauseStartTime: number | undefined = undefined;
@@ -76,3 +76,5 @@ export class TimerEntry {
     this.isPaused = false;
   }
 }
+
+export const timer = new TimerEntry();

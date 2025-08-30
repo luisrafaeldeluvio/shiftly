@@ -1,7 +1,7 @@
-import { timer } from "./main";
+import { timer } from "./timer-entry";
 import { getElement } from "./helpers/get-element";
 
-export class TimerUIController {
+class TimerUIController {
   private readonly timer: Element = getElement(".timer");
   private readonly controls: Element = getElement(
     ".timer__controls",
@@ -67,3 +67,5 @@ export class TimerUIController {
     this.isTimerCollapsed = !this.isTimerCollapsed;
   }
 }
+
+export const timerUIController = new TimerUIController();
