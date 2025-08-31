@@ -13,6 +13,7 @@ export function handleStopClick(): void {
   timerUIController.setDisplay("");
   timer.stop();
   refreshHistoryEntries();
+  timerUIController.toggleControls();
   timerUIController.toggle();
 }
 

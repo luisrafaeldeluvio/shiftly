@@ -42,8 +42,8 @@ class TimerUIController {
   }
 
   private toggleControlsIcon(): void {
-    this.pauseIcon.classList.toggle("hidden");
-    this.resumeIcon.classList.toggle("hidden");
+    this.pauseIcon.classList.toggle("hidden", timer.isPaused);
+    this.resumeIcon.classList.toggle("hidden", !timer.isPaused);
   }
 
   toggleControls(): void {

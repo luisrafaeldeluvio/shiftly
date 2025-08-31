@@ -7,15 +7,12 @@ export function getNavItems(navElement: HTMLElement) {
   if (!navElement.childElementCount)
     throw new Error(`${navElement} does not have children`);
 
-  if (panelsList.length !== navElement.childElementCount)
-    throw new Error(
-      `Panels(${panelsList.length}) and nav items(${navElement.childElementCount}) amount do not match`,
-    );
-
   Array.from(panelsList).map((panel, index) => {
     if (!panel.id) throw new Error(`${panel} has no ID`);
 
     const item = navElement.children[index];
+
+    if (!item) return;
     panelsNavRecord[item.id] = panel.id;
   });
 
