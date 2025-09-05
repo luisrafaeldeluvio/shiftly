@@ -63,6 +63,36 @@
     <div id="panelstats" class="panel stats">stats</div>
 
     <div id="panelsettings" class="panel settings">Settings</div>
+    <div id="panelnewentry" class="panel new-entry">
+      <div class="new-entry__container">
+        <form action="" id="new-entry__form">
+          <legend class="new-entry__text">Add New Entry</legend>
+          <ul>
+            <li>
+              <label for="new-entry__initial-time">Initial Time</label>
+              <input
+                type="datetime-local"
+                name="Start"
+                id="new-entry__initial-time"
+                required
+              />
+            </li>
+            <li>
+              <label for="new-entry__final-time">Final Time</label>
+              <input
+                type="datetime-local"
+                name="End"
+                id="new-entry__final-time"
+                required
+              />
+            </li>
+          </ul>
+          <button type="button" id="new-entry__submit-button">Add</button>
+        </form>
+
+        <span class="new-entry__total-time">Total Time:</span>
+      </div>
+    </div>
 
     <div class="nav">
       <ul class="nav__list nav__main">
