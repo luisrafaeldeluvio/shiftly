@@ -36,3 +36,7 @@ export function handleNewTimerEntry(): void {
   refreshHistoryEntries();
   changeActivePanel("panelhistory");
 }
+
+// TODO:
+// add the error handling (classes)
+// add style

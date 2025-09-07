@@ -1,10 +1,14 @@
 import { db } from "./db";
+import { timerSnapshot } from "./timerSnapshot";
+
+type pause = [number, number];
 
 class TimerEntry {
   private initialTime: number | undefined = undefined;
   private finalTime: number | undefined = undefined;
   public pauseStartTime: number | undefined = undefined;
   public pauseTotalTime: number = 0;
+  public pauseList: pause[] = [];
   public isPaused: boolean = false;
   public isRunning: boolean = false;
 
@@ -38,6 +42,7 @@ class TimerEntry {
 
     this.initialTime = Date.now();
     this.isRunning = true;
+    timerSnapshot.makeSnapshot(this.initialTime, this.pauseList);
   }
 
   public stop(): void {
@@ -70,6 +75,8 @@ class TimerEntry {
 
   public resume(): void {
     if (!this.isRunning || !this.pauseStartTime || !this.isPaused) return;
+
+    this.pauseList.push([this.pauseStartTime, Date.now()]);
 
     this.pauseTotalTime += Date.now() - this.pauseStartTime;
     this.pauseStartTime = undefined;
