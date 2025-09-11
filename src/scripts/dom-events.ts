@@ -4,6 +4,10 @@ import { handleNavClicks } from "./domEvents/nav.ts";
 import * as historyPanelScroll from "./domEvents/historyPanel.ts";
 import { changeActivePanel } from "./changeActivePanel.ts";
 import { handleNewTimerEntry } from "./domEvents/newTimerEntry.ts";
+import { timerSnapshot } from "./timerSnapshot.ts";
+import { timer } from "./timer-entry.ts";
+import { formatElapsedTime } from "./helpers/format-date.ts";
+import { timerUIController } from "./timer-ui.ts";
 
 const startButton = getElement(".ts-timestart");
 const stopButton = getElement(".ts-timestop");
@@ -12,6 +16,7 @@ const addButton = getElement("#navadd");
 const historyPanel = getElement(".history__container");
 const nav = getElement(".nav > ul") as HTMLUListElement;
 const createNewPanelButton = getElement("#new-entry__submit-button");
+const timerCounterContainer = getElement(".ts-timer-display");
 
 export function initDOMEvents(): void {
   startButton.addEventListener("click", timerControls.handleStartClick);
@@ -36,3 +41,13 @@ historyPanel.addEventListener(
 
 addButton.addEventListener("click", () => changeActivePanel("panelnewentry"));
 createNewPanelButton.addEventListener("click", handleNewTimerEntry);
+
+window.addEventListener("load", () => {
+  if (timerSnapshot.getSnapshot() === "{}" || timer.isRunning) return;
+
+  const snapshot = JSON.parse(timerSnapshot.getSnapshot());
+
+  timerUIController.toggle();
+  timer.start(snapshot.isPaused, snapshot.initialTime, snapshot.pauseTotalTime);
+  timerCounterContainer.innerHTML = `${formatElapsedTime(timer.elapsedTime)}`;
+});

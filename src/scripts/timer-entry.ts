@@ -1,14 +1,11 @@
 import { db } from "./db";
 import { timerSnapshot } from "./timerSnapshot";
 
-type pause = [number, number];
-
 class TimerEntry {
   private initialTime: number | undefined = undefined;
   private finalTime: number | undefined = undefined;
   public pauseStartTime: number | undefined = undefined;
   public pauseTotalTime: number = 0;
-  public pauseList: pause[] = [];
   public isPaused: boolean = false;
   public isRunning: boolean = false;
 
@@ -37,12 +34,24 @@ class TimerEntry {
     };
   }
 
-  public start(): void {
+  public start(
+    isPaused?: boolean,
+    initialTime?: number,
+    pauseTotalTime?: number,
+  ): void {
     if (this.isRunning) return;
 
-    this.initialTime = Date.now();
     this.isRunning = true;
-    timerSnapshot.makeSnapshot(this.initialTime, this.pauseList);
+    this.initialTime = initialTime
+      ? initialTime - (pauseTotalTime ?? 0)
+      : Date.now();
+    if (isPaused) this.pause();
+
+    timerSnapshot.makeSnapshot({
+      initialTime: this.initialTime,
+      pauseTotalTime: this.pauseTotalTime,
+      isPaused: this.isPaused,
+    });
   }
 
   public stop(): void {
@@ -64,23 +73,39 @@ class TimerEntry {
     this.finalTime = undefined;
     this.pauseTotalTime = 0;
     this.isRunning = false;
+    timerSnapshot.removeSnapshot();
   }
 
   public pause(): void {
-    if (!this.isRunning || this.isPaused) return;
+    if (!this.isRunning || this.isPaused || !this.initialTime) return;
 
     this.pauseStartTime = Date.now();
     this.isPaused = true;
+
+    timerSnapshot.makeSnapshot({
+      initialTime: this.initialTime,
+      pauseTotalTime: this.pauseTotalTime,
+      isPaused: this.isPaused,
+    });
   }
 
   public resume(): void {
-    if (!this.isRunning || !this.pauseStartTime || !this.isPaused) return;
-
-    this.pauseList.push([this.pauseStartTime, Date.now()]);
+    if (
+      !this.isRunning ||
+      !this.pauseStartTime ||
+      !this.isPaused ||
+      !this.initialTime
+    )
+      return;
 
     this.pauseTotalTime += Date.now() - this.pauseStartTime;
     this.pauseStartTime = undefined;
     this.isPaused = false;
+    timerSnapshot.makeSnapshot({
+      initialTime: this.initialTime,
+      pauseTotalTime: this.pauseTotalTime,
+      isPaused: this.isPaused,
+    });
   }
 }
 
